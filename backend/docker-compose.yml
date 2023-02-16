@@ -1,5 +1,10 @@
-version: "3.3"
+version: "3.8"
 services:
+  cache:
+    image: redis:6.2-alpine
+    restart: always
+    ports:
+      - "6379:6379"
   mongodb:
     container_name: mongodb
     ports:
@@ -8,13 +13,7 @@ services:
     environment:
       - MONGODB_USER="user"
       - MONGODB_PASS="pass"
-    volumes:
-      - "mongodb-data:/data/db"
-  # mongoclient:
-  #   container_name: mongoclient
-  #   ports:
-  #     - "4000:3000"
-  #   image: mongoclient/mongoclient:latest
 
 volumes:
+  cache: driver:local
   mongodb-data: {}
